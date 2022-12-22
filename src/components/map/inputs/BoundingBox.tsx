@@ -4,6 +4,9 @@ import osmtogeojson from "osmtogeojson";
 //apis
 import { getMap } from "../../../services/locationInfo/locationInfo";
 
+//styles
+import styles from "./BoundingBox.module.scss";
+
 interface IBoundingBox {
   geoJSONDataSetter: any;
   boundingBoxSetter: any;
@@ -59,54 +62,57 @@ const BoundingBox: FC<IBoundingBox> = ({
 
   return (
     <>
-      <form
-        onSubmit={onFormSubmit}
-        style={{ display: "flex", justifyContent: "space-between" }}
-      >
-        Search features by typing Bounding-box values :
-        <label htmlFor="left">
-          Left min Longitude:
-          <input
-            id="left"
-            type="number"
-            min="-90"
-            max="90"
-            step="0.0000000001"
-          />
-        </label>
-        <label htmlFor="bottom">
-          Bottom min Latitude:
-          <input
-            id="bottom"
-            type="number"
-            min="-180"
-            max="180"
-            step="0.0000000001"
-          />
-        </label>
-        <label htmlFor="right">
-          Right max Longitude:
-          <input
-            id="right"
-            type="number"
-            min="-90"
-            max="90"
-            step="0.0000000001"
-          />
-        </label>
-        <label htmlFor="top">
-          Top max Latitude:
-          <input
-            id="top"
-            type="number"
-            min="-180"
-            max="180"
-            step="0.0000000001"
-          />
-        </label>
-        <button type="submit" disabled={loading}>
-          {loading ? " LOADING..." : "Search"}{" "}
-        </button>
+      <p> Search features by Bounding-box :</p>
+      <form onSubmit={onFormSubmit} className={styles.form}>
+        <div className={styles.inputs}>
+          <div>
+            <label htmlFor="left">Left min Longitude: </label>
+            <input
+              id="left"
+              type="number"
+              min="-90"
+              max="90"
+              step="0.0000000001"
+            />
+          </div>
+          <div>
+            <label htmlFor="bottom">Bottom min Latitude:</label>
+            <input
+              id="bottom"
+              type="number"
+              min="-180"
+              max="180"
+              step="0.0000000001"
+            />{" "}
+          </div>
+          <div>
+            <label htmlFor="right">Right max Longitude:</label>
+            <input
+              id="right"
+              type="number"
+              min="-90"
+              max="90"
+              step="0.0000000001"
+            />{" "}
+          </div>
+
+          <div>
+            <label htmlFor="top">Top max Latitude:</label>
+            <input
+              id="top"
+              type="number"
+              min="-180"
+              max="180"
+              step="0.0000000001"
+            />{" "}
+          </div>
+        </div>
+        <br />
+        <div className={styles.buttonContainer}>
+          <button type="submit" disabled={loading}>
+            {loading ? " LOADING..." : "Search"}{" "}
+          </button>
+        </div>
       </form>
       {error && (
         <div style={{ color: "red" }} role="alert">
